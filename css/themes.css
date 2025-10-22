@@ -1,0 +1,102 @@
+body::after {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	height: 100lvh;
+	background: var(--bg-image) center/cover no-repeat;
+	z-index: -2;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	height: 100lvh;
+	background: rgba(255, 255, 255, 0.486);
+	pointer-events: none;
+	z-index: -1;
+}
+
+body.theme__cards-big {
+	--bg-image: url('../img/themes/cards-big.jpg');
+}
+
+body.theme__cards-coffee {
+	--bg-image: url('../img/themes/cards-coffee.jpg');
+}
+
+body.theme__cards-deck {
+	--bg-image: url('../img/themes/cards-deck.jpg');
+}
+
+body.theme__cards-table {
+	--bg-image: url('../img/themes/cards-table.jpg');
+}
+
+body.theme__meditation {
+	--bg-image: url('../img/themes/meditation.jpg');
+}
+
+body.theme__meditation-blue {
+	--bg-image: url('../img/themes/meditation-blue.jpg');
+}
+
+.theme__cards-big .calendar__days-name_day {	
+	text-shadow: 0 0 3px hsl(0, 0%, 66%),
+							 0 0 5px hsl(0, 0%, 0%),
+							 0 0 4px hsla(0, 0%, 100%, 0.4),
+							 6px 6px 4px hsl(12, 66%, 58%),
+							-4px -6px 6px hsl(229, 65%, 56%),
+							 0 0 9px hsl(0, 42%, 46%);
+}
+
+.theme__cards-coffee .calendar__days-name_day {	
+	text-shadow: 0 0 3px hsl(0, 0%, 66%),
+							 0 0 5px hsl(0, 0%, 0%),
+							 0 0 4px hsla(0, 0%, 100%, 0.4),
+							 6px 6px 4px hsl(12, 66%, 58%),
+							-4px -6px 6px hsl(0, 14%, 21%),
+							 0 0 9px hsl(0, 42%, 46%);
+}
+
+.theme__cards-deck .calendar__days-name_day {	
+	text-shadow: 0 0 3px hsl(0, 0%, 66%),
+							 0 0 5px hsl(0, 0%, 0%),
+							 0 0 4px hsla(0, 0%, 100%, 0.4),
+							 6px 6px 4px hsl(12, 66%, 58%),
+							-4px -6px 6px hsl(56, 73%, 68%),
+							 0 0 9px hsl(0, 42%, 46%);
+}
+
+.theme__cards-table .calendar__days-name_day {	
+	text-shadow: 0 0 3px hsl(0, 0%, 66%),
+							 0 0 5px hsl(0, 0%, 0%),
+							 0 0 4px hsla(0, 0%, 100%, 0.4),
+							 6px 6px 4px hsl(36, 45%, 72%),
+							-4px -6px 6px hsl(335, 62%, 65%),
+							 0 0 9px hsl(0, 42%, 46%);
+}
+
+.theme__meditation .calendar__days-name_day {	
+	text-shadow: 0 0 3px hsl(0, 0%, 66%),
+							 0 0 5px hsl(0, 0%, 0%),
+							 0 0 4px hsla(0, 0%, 100%, 0.4),
+							 6px 6px 4px hsl(295, 66%, 58%),
+							-4px -6px 6px hsl(229, 65%, 56%),
+							 0 0 9px hsl(0, 42%, 46%);
+}
+
+.theme__meditation-blue .calendar__days-name_day {	
+	text-shadow: 0 0 3px hsl(0, 0%, 66%),
+							 0 0 5px hsl(0, 0%, 0%),
+							 0 0 4px hsla(0, 0%, 100%, 0.4),
+							 6px 6px 4px hsl(0, 0%, 100%),
+							-4px -6px 6px hsl(229, 65%, 56%),
+							 0 0 9px hsl(236, 51%, 59%);
+}
