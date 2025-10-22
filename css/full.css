@@ -1,0 +1,48 @@
+html {
+  min-height: 100%;
+}
+
+body {
+	position: relative;
+	min-height: 100vh;
+}
+
+.full-wrapper {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 40px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 100px;	
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+@media (max-width: 1279px) {
+	.full-wrapper {
+		max-width: 1024px;
+		gap: 40px;
+	}
+}
+
+@media (max-width: 1023px) {
+	.full-wrapper {
+		max-width: 768px;
+		padding: 0 20px;
+		gap: 20px;
+	}
+}
+
+@media (max-width: 767px) {
+	.full-wrapper {
+		max-width: 600px;
+	}
+}
+
+@media (max-width: 599px) {
+	.full-wrapper {
+		width: 100%;
+	}
+}

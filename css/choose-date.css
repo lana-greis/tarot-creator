@@ -1,0 +1,234 @@
+.chose-date__wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+
+.chose-date {
+	padding: 40px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 40px;
+}
+
+.chose-date > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.chose-date > div > p {
+	text-align: center;
+	font-size: 58px;
+	padding-bottom: 20px;
+	font-family: "Marck Script", cursive;
+}
+
+.chose-date > div > input {
+	padding: 5px 10px;
+	border-radius: 10px;
+	font-size: 48px;
+	text-align: center;
+	border: solid black 1px;
+}
+
+#form-month {
+	width: 90px;
+}
+
+#form-year {
+	width: 170px;	
+}
+
+#form-month,
+#form-year {
+	font-family: "Poiret One", sans-serif;
+}
+
+.chose-date_btn,
+.save-btn {
+	font-size: 36px;
+	padding: 10px 20px;
+	border: solid 1px black;
+	border-radius: 15px;
+	background-color: #e9e9e9;
+	transition: .3s;
+	font-family: "Poiret One", sans-serif;
+}
+
+.chose-date_btn:hover,
+.save-btn:hover {
+	cursor: pointer;
+	background-color: #e2e2e2;	
+}
+
+.chose-date_btn:active,
+.save-btn:active {
+	transform: scale(1.1, 1.1);
+}
+
+.chose-theme {
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	align-items: center;
+	padding-top: 120px;
+	gap: 20px;
+}
+
+.chose-theme select,
+#form-month {
+	padding: 5px 10px;
+	border-radius: 10px;
+	width: 100%;
+	border: 1px solid black;
+}
+
+.chose-theme select option,
+.chose-theme select,
+#form-month,
+#form-month option {
+	font-family: "Poiret One", sans-serif;
+	font-size: 20px;
+}
+
+.chose-theme__title,
+.chose-deck__title {
+	font-family: "Marck Script", cursive;
+	font-size: 30px;
+}
+
+.month-card {
+	width: 200px;
+	min-height: 200px;
+	align-self: center;
+	transition: .3s;
+	border-radius: 8px;
+	overflow: hidden;
+	position: relative;
+	background: #fcfcfc49;
+}
+
+.month-card:hover {
+	cursor: pointer;	
+	transform: scale(1.04, 1.04);
+	background-color: #e9e9e9b2;
+}
+
+.month-card_img__wrapper {
+	width: 100%;
+}
+
+.month-card__text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	font-family: "Marck Script", cursive;
+	font-size: 30px;
+}
+
+@media (max-width: 1279px) {
+	.chose-date {
+		gap: 20px;
+	}
+
+	.chose-date > div > p {
+		font-size: 30px;
+		padding-bottom: 10px;
+	}
+
+	.chose-date > div > input {
+		font-size: 24px;
+	}
+	
+	#form-year {
+		width: 90px;
+	}
+
+	.chose-date_btn,
+	.save-btn {
+		font-size: 24px;
+	}
+
+	.chose-theme {
+		width: 200px;
+		padding-top: 80px;
+	}
+}
+
+@media (max-width: 1023px) {
+	.chose-date > div > p {
+		font-size: 16px;
+		padding-bottom: 5px;
+		font-weight: bold;
+	}
+
+	.chose-date > div > input {
+		font-size: 15px;
+	}
+	
+	#form-year {
+		width: 65px;
+	}
+
+	.chose-date_btn,
+	.save-btn {
+		font-size: 16px;
+	}
+
+	.save-btn {
+		margin-bottom: 40px;
+	}
+
+	.chose-theme {
+		width: 150px;
+		padding-top: 40px;
+		gap: 10px;
+	}
+
+	.chose-theme__title,
+	.chose-deck__title {
+		font-size: 16px;
+	}
+
+	.chose-theme select option,
+	.chose-theme select,
+	#form-month,
+	#form-month option {
+	font-size: 15px;
+}
+}
+
+@media (max-width: 599px) {
+	.chose-date__wrapper {
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 20px;
+		gap: 20px;
+	}
+
+	.chose-date {
+		padding: 10px 0;
+		gap: 10px;
+	}
+
+	.chose-theme {
+		padding-top: 0;
+	}
+
+	#form-month,
+	#form-year,
+	.chose-date_btn,
+	.save-btn,
+	.chose-theme,
+	.chose-date {
+		width: 100%;
+	}
+
+	.month-card {
+		order: 3;
+	}
+}

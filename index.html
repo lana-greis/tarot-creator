@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Poiret+One&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./css/style.css">
+	<title>Виртуальный расклад</title>
+</head>
+
+<body class="body theme__cards-big">
+	<div class="full-wrapper">
+		<div class="chose-date__wrapper">
+			<div class="month-card">
+				<div class="month-card_img__wrapper"></div>
+				<p class="month-card__text">Карта месяца</p>
+			</div>
+			<div class="chose-date">
+				<div class="chose-date_month">
+					<p>Месяц</p>
+					<select class="chose-month-select" id="form-month">
+						<option value="1" selected>Январь</option>
+						<option value="2">Февраль</option>
+						<option value="3">Март</option>
+						<option value="4">Апрель</option>
+						<option value="5">Май</option>
+						<option value="6">Июнь</option>
+						<option value="7">Июль</option>
+						<option value="8">Август</option>
+						<option value="9">Сентябрь</option>
+						<option value="10">Октябрь</option>
+						<option value="11">Ноябрь</option>
+						<option value="12">Декабрь</option>
+					</select>
+				</div>
+				<div class="chose-date_year">
+					<p>Год</p>
+					<input type="number" name="choosen-year" id="form-year" oninput="this.value = this.value.slice(0, 4)">
+				</div>
+				<button type="button" class="chose-date_btn">Создать планер</button>
+			</div>
+			<div class="chose-theme">
+				<p class="chose-theme__title">Выбор фона</p>
+				<select class="chose-theme-select" id="chose-theme-select-id">
+					<option value="cards-big" selected>Карты (большие)</option>
+					<option value="cards-coffee">Карты с кофе</option>
+					<option value="cards-deck">Карты (колода)</option>
+					<option value="cards-table">Расклад</option>
+					<option value="meditation">Медитация (фиолетовый)</option>
+					<option value="meditation-blue">Медитация (синий)</option>
+				</select>
+				<p class="chose-deck__title">Выбор колоды</p>
+				<select class="chose-deck-select" id="chose-deck-select-id">
+					<option value="1001-nights" selected>1001 ночь</option>
+					<option value="ancient-egyptian">Древний Египет</option>
+					<option value="babylonian">Вавилон</option>
+					<option value="golden-of-renaissance">Золото эпохи Возрождения</option>
+					<option value="gothic-of-the-vampires">Вампирская готика</option>
+					<option value="llewellyn">Llewellyn</option>
+					<option value="secret-forest">Тайный лес</option>
+					<option value="silicon-dawn">Кремниевый рассвет</option>
+				</select>
+			</div>
+		</div>
+		<input type="text" name="upperText" id="upperText" class="input-text" placeholder="Текст над календарем">
+		<div class="calendar__wrapper">
+			<div class="calendar__days-names">
+				<div class="calendar__days-name_day">Понедельник</div>
+				<div class="calendar__days-name_day">Вторник</div>
+				<div class="calendar__days-name_day">Среда</div>
+				<div class="calendar__days-name_day">Четверг</div>
+				<div class="calendar__days-name_day">Пятница</div>
+				<div class="calendar__days-name_day">Суббота</div>
+				<div class="calendar__days-name_day">Воскресенье</div>
+			</div>
+			<div class="calendar__dates"></div>
+		</div>
+		<div class="save-btn__wrapper">
+			<button type="button" class="save-btn">Создать ссылку</button>
+		</div>
+	</div>
+	<div class="what-day">
+		<div id="what-day__wrapper" class="what-day" data-state="closed">
+			<button type="button" class="what-day__toggle" title="Открыть выбор дня">
+				<span class="what-day__chevron">&lt;</span>
+			</button>
+			<div id="what-day-panel" class="what-day__panel">
+				<label for="wday-input" class="what-day__label">Выбрать день:</label>
+				<input id="wday-input" class="what-day__input" type="number" inputmode="numeric" name="wday">
+				<button type="button" class="what-day__btn" title="Подобрать">
+					<img class="what-day__btn_img" src="./img/magic-wand.png" alt="Волшебная палочка">
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="days-input">
+	</div>
+	<script type="module" src="./js/script.js"></script>
+</body>
+
+</html>
