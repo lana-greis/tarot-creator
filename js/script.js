@@ -1,4 +1,4 @@
-import { firebaseConfig } from './firebase.js'
+/*import { firebaseConfig } from './firebase.js'
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"
 import {
 	getFirestore,
@@ -10,7 +10,7 @@ import {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-
+*/
 const calendarDates = document.querySelector('.calendar__dates')
 const choosenDate = document.querySelector('.chose-date')
 const choosenMonthInput = choosenDate.children[0].children[1]
@@ -616,6 +616,7 @@ const createEmptyCellForDay = () => {
 const createCellForDay = (dateNum) => {
 	const newCell = document.createElement('div')
 	newCell.classList.add('calendar__dates_cell')
+	newCell.classList.add('calendar__dates_cell__real')
 	if (dateNum < 10) newCell.classList.add('calendar__dates_cell__short_date')
 	newCell.id = `day${dateNum}`
 	calendarDates.append(newCell)
@@ -814,6 +815,310 @@ wdayBtn.addEventListener('click', () => {
 	}
 })
 
+const settingsWrapper = document.getElementById("settings__wrapper")
+const settingsToggle = settingsWrapper.querySelector(".settings__toggle")
+const settingsBtnSave = settingsWrapper.querySelector(".settings__btn_save")
+const settingsBtnLoad = settingsWrapper.querySelector(".settings__btn_load")
+
+settingsToggle.addEventListener("click", () => {
+	const isOpen = settingsWrapper.getAttribute("data-state") === "open"
+	settingsWrapper.setAttribute("data-state", isOpen ? "closed" : "open")
+})
+
+settingsBtnSave.addEventListener('click', () => {
+	const allForms = document.querySelectorAll('.day-input')
+
+	if (!allForms[1]) return
+
+	const monthCardInputs = document.querySelector('.month-full-wow-input')
+	const monthCardTypeSelect = monthCardInputs.children[0].children[1]
+	const monthCardNameSelect = monthCardInputs.children[0].children[2]
+	const monthColorSelect = monthCardInputs.children[1].children[1]
+	const monthColorSelectTwo = monthCardInputs.children[1].children[2]
+	const monthColorDescription = monthCardInputs.children[1].children[3]
+	const monthTextArea = monthCardInputs.children[2].children[1]
+
+	const monthCardType = monthCardTypeSelect.value
+	const monthCardName = monthCardNameSelect.value
+	const monthColor = monthColorSelect.value
+	const monthColorTwo = monthColorSelectTwo.value
+	const monthDescription = monthColorDescription.value
+	const monthText = monthTextArea.value
+
+	const data = {
+		month: choosenMonthInput.value,
+		year: choosenYearInput.value,
+		monthCard: {
+			cardType: monthCardType,
+			cardName: monthCardName,
+			color: monthColor,
+			colorTwo: monthColorTwo,
+			description: monthDescription,
+			text: monthText
+		},
+		days: [],
+		theme: choseThemeSelect.value,
+		deck: choseDeckSelect.value,
+		introText: textIntroItem.value,
+	}
+
+	for (let i = 0; i < allForms.length; i++) {
+		const dayNumber = i + 1
+
+		const cardTypeSelect = allForms[i].querySelector('select[class*="-card-select"]:not([class*="-card-select-2"])')
+		const cardNameSelect = allForms[i].querySelector(`select[class*="-card-select-2"]`)
+		const colorSelect = allForms[i].querySelector(`select[class*="-color-select"]`)
+		const colorSelectTwo = allForms[i].querySelector(`select[class*="-color-select2"]`)
+		const textArea = allForms[i].querySelector('textarea')
+
+		const cardType = cardTypeSelect.value
+		const cardName = cardNameSelect.value
+		const color = colorSelect.value
+		const colorTwo = colorSelectTwo.value
+		const text = textArea.value.trim()
+
+		data.days.push({
+			day: dayNumber,
+			cardType,
+			cardName,
+			color,
+			colorTwo,
+			description: allForms[i].querySelector('input[type="text"]').value.trim(),
+			text
+		})
+	}
+
+	localStorage.setItem('formDraft', JSON.stringify(data))
+})
+
+let fullInfoObject = {}
+
+settingsBtnLoad.addEventListener('click', () => {
+	const saved = localStorage.getItem('formDraft')
+	if (saved) {
+		fullInfoObject = JSON.parse(saved)
+	} else {
+		return
+	}
+
+	themesRemove()
+	bodyItem.classList.add(`theme__${fullInfoObject.theme}`)
+	choseThemeSelect.value = fullInfoObject.theme
+
+	currentDeck = fullInfoObject.deck
+	choseDeckSelect.value = fullInfoObject.deck
+
+	choosenYearInput.value = fullInfoObject.year
+	choosenMonthInput.value = fullInfoObject.month
+	createCalendar(fullInfoObject.year, fullInfoObject.month)
+	createFormForMonth()
+
+	textIntroItem.value = fullInfoObject.introText
+
+	const loadMonthCard = () => {
+		const dayCell = document.querySelector(`.month-card`)
+		const monthCardInputs = document.querySelector('.month-full-wow-input')
+
+		const cardType = fullInfoObject.monthCard.cardType
+		const cardName = fullInfoObject.monthCard.cardName
+		const color = fullInfoObject.monthCard.color
+		const colorTwo = fullInfoObject.monthCard.colorTwo
+		const description = fullInfoObject.monthCard.description
+		const fullText = fullInfoObject.monthCard.text
+
+		const monthCardTypeSelect = monthCardInputs.children[0].children[1]
+		const monthCardNameSelect = monthCardInputs.children[0].children[2]
+		const monthColorSelect = monthCardInputs.children[1].children[1]
+		const monthColorSelectTwo = monthCardInputs.children[1].children[2]
+		const monthColorDescription = monthCardInputs.children[1].children[3]
+		const monthTextArea = monthCardInputs.children[2].children[1]
+
+		if (cardType !== '') {
+			const cardPath = (fullInfoObject.monthCard.cardType === 'sa')
+				? `./img/cards/${fullInfoObject.deck}/${fullInfoObject.monthCard.cardName}.jpg`
+				: `./img/cards/${fullInfoObject.deck}/${fullInfoObject.monthCard.cardType}-${fullInfoObject.monthCard.cardName}.jpg`
+			const cardBlock = dayCell.children[0]
+			cardBlock.innerHTML = ''
+			const img = document.createElement('img')
+			img.src = cardPath
+			img.alt = 'Карта'
+			img.style.width = '100%'
+			img.style.maxHeight = '100%'
+			cardBlock.appendChild(img)
+
+			const saValues = cardType === 'sa' ? [
+				{ text: "Шут (Дурак)", value: "00-Shut" },
+				{ text: "Маг", value: "01-Mag" },
+				{ text: "Жрица", value: "02-Zhrica" },
+				{ text: "Императрица", value: "03-Imperatrica" },
+				{ text: "Император", value: "04-Imperator" },
+				{ text: "Жрец", value: "05-Zhrec" },
+				{ text: "Влюбленные", value: "06-Vljublennye" },
+				{ text: "Колесница", value: "07-Kolesnica" },
+				{ text: "Справедливость", value: "08-Spravedlivost" },
+				{ text: "Отшельник", value: "09-Otshelnik" },
+				{ text: "Колесо фортуны", value: "10-Koleso-Fortuny" },
+				{ text: "Сила", value: "11-Sila" },
+				{ text: "Повешенный", value: "12-Poveshennyj" },
+				{ text: "Смерть", value: "13-Smert" },
+				{ text: "Умеренность", value: "14-Umerennost" },
+				{ text: "Дьявол", value: "15-Diavol" },
+				{ text: "Башня", value: "16-Bashnja" },
+				{ text: "Звезда", value: "17-Zvezda" },
+				{ text: "Луна", value: "18-Luna" },
+				{ text: "Солнце", value: "19-Solnce" },
+				{ text: "Суд", value: "20-Sud" },
+				{ text: "Мир", value: "21-Mir" }
+			] : [
+				{ text: "Туз", value: "01" },
+				{ text: "2", value: "02" },
+				{ text: "3", value: "03" },
+				{ text: "4", value: "04" },
+				{ text: "5", value: "05" },
+				{ text: "6", value: "06" },
+				{ text: "7", value: "07" },
+				{ text: "8", value: "08" },
+				{ text: "9", value: "09" },
+				{ text: "10", value: "10" },
+				{ text: "Король", value: "korol" },
+				{ text: "Королева", value: "koroleva" },
+				{ text: "Паж", value: "pazh" },
+				{ text: "Рыцарь", value: "rycar" }
+			]
+
+			saValues.forEach((optionData) => {
+				let newOption = new Option(optionData.text, optionData.value)
+				monthCardNameSelect.add(newOption, undefined)
+			})
+
+			monthCardTypeSelect.value = cardType
+			monthCardNameSelect.value = cardName
+
+			const cardBlockText = dayCell.children[1]
+			cardBlockText.innerText = ''
+		} else {
+			const cardBlock = dayCell.children[0]
+			cardBlock.innerHTML = ''
+			const cardBlockText = dayCell.children[1]
+			cardBlockText.innerText = 'Карта месяца'
+			dayCell.style.removeProperty('box-shadow')
+		}
+
+		if (color !== '') {
+			dayCell.style.boxShadow = `0 0 12px 3px #${color}`
+			monthColorSelect.value = color
+
+			if (colorTwo !== '') monthColorSelectTwo.value = colorTwo
+		}
+
+		if (description !== '') monthColorDescription.value = description
+		if (fullText !== '') monthTextArea.value = fullText
+	}
+	loadMonthCard()
+
+	const daysItems = document.querySelectorAll('.calendar__dates_cell__real')
+	const daysForms = document.querySelectorAll('.day-input')
+
+	const loadDay = (dayNumber) => {
+		const dayCell = daysItems[dayNumber]
+		const dayForm = daysForms[dayNumber]
+
+		const cardType = fullInfoObject.days[dayNumber].cardType
+		const cardName = fullInfoObject.days[dayNumber].cardName
+		const color = fullInfoObject.days[dayNumber].color
+		const colorTwo = fullInfoObject.days[dayNumber].colorTwo
+		const description = fullInfoObject.days[dayNumber].description
+		const fullText = fullInfoObject.days[dayNumber].text
+
+		const dayCardTypeSelect = dayForm.children[0].children[1]
+		const dayCardNameSelect = dayForm.children[0].children[2]
+		const dayColorSelect = dayForm.children[1].children[1]
+		const dayColorSelectTwo = dayForm.children[1].children[2]
+		const dayColorDescription = dayForm.children[1].children[3]
+		const dayTextArea = dayForm.children[2].children[1]
+
+		if (cardType !== '') {
+			const cardPath = (fullInfoObject.days[dayNumber].cardType === 'sa')
+				? `./img/cards/${fullInfoObject.deck}/${fullInfoObject.days[dayNumber].cardName}.jpg`
+				: `./img/cards/${fullInfoObject.deck}/${fullInfoObject.days[dayNumber].cardType}-${fullInfoObject.days[dayNumber].cardName}.jpg`
+			const cardBlock = dayCell.children[1]
+			cardBlock.innerHTML = ''
+			const img = document.createElement('img')
+			img.src = cardPath
+			img.alt = 'Карта'
+			img.style.width = '100%'
+			img.style.maxHeight = '100%'
+			cardBlock.appendChild(img)
+
+			const saValues = cardType === 'sa' ? [
+				{ text: "Шут (Дурак)", value: "00-Shut" },
+				{ text: "Маг", value: "01-Mag" },
+				{ text: "Жрица", value: "02-Zhrica" },
+				{ text: "Императрица", value: "03-Imperatrica" },
+				{ text: "Император", value: "04-Imperator" },
+				{ text: "Жрец", value: "05-Zhrec" },
+				{ text: "Влюбленные", value: "06-Vljublennye" },
+				{ text: "Колесница", value: "07-Kolesnica" },
+				{ text: "Справедливость", value: "08-Spravedlivost" },
+				{ text: "Отшельник", value: "09-Otshelnik" },
+				{ text: "Колесо фортуны", value: "10-Koleso-Fortuny" },
+				{ text: "Сила", value: "11-Sila" },
+				{ text: "Повешенный", value: "12-Poveshennyj" },
+				{ text: "Смерть", value: "13-Smert" },
+				{ text: "Умеренность", value: "14-Umerennost" },
+				{ text: "Дьявол", value: "15-Diavol" },
+				{ text: "Башня", value: "16-Bashnja" },
+				{ text: "Звезда", value: "17-Zvezda" },
+				{ text: "Луна", value: "18-Luna" },
+				{ text: "Солнце", value: "19-Solnce" },
+				{ text: "Суд", value: "20-Sud" },
+				{ text: "Мир", value: "21-Mir" }
+			] : [
+				{ text: "Туз", value: "01" },
+				{ text: "2", value: "02" },
+				{ text: "3", value: "03" },
+				{ text: "4", value: "04" },
+				{ text: "5", value: "05" },
+				{ text: "6", value: "06" },
+				{ text: "7", value: "07" },
+				{ text: "8", value: "08" },
+				{ text: "9", value: "09" },
+				{ text: "10", value: "10" },
+				{ text: "Король", value: "korol" },
+				{ text: "Королева", value: "koroleva" },
+				{ text: "Паж", value: "pazh" },
+				{ text: "Рыцарь", value: "rycar" }
+			]
+
+			saValues.forEach((optionData) => {
+				let newOption = new Option(optionData.text, optionData.value)
+				dayCardNameSelect.add(newOption, undefined)
+			})
+
+			dayCardTypeSelect.value = cardType
+			dayCardNameSelect.value = cardName
+		}
+
+		if (color !== '') {
+			dayCell.style.boxShadow = `0 0 12px 3px #${color}`
+			dayColorSelect.value = color
+
+			if (colorTwo !== '') {
+				dayCell.children[0].style.boxShadow = `0 0 12px 3px #${colorTwo}`
+				dayCell.style.backgroundColor = `#${colorTwo}33`
+				dayColorSelectTwo.value = colorTwo
+			}
+		}
+
+		if (description !== '') dayColorDescription.value = description
+		if (fullText !== '') dayTextArea.value = fullText
+	}
+
+	for (let i = 0; i < daysItems.length; i++) {
+		loadDay(i)
+	}
+})
+
 const themesRemove = () => {
 	const classesToRemove = Array.from(bodyItem.classList)
 		.filter(cls => cls.startsWith('theme__'))
@@ -832,6 +1137,12 @@ choseDeckSelect.addEventListener('change', () => {
 
 const changeDeckVision = (deck) => {
 	document.querySelectorAll('.calendar__dates_cell__card img').forEach(imgEl => {
+		const parts = imgEl.src.split('/')
+		const fileName = parts[parts.length - 1]
+		imgEl.src = `./img/cards/${deck}/${fileName}`
+	})
+
+	document.querySelectorAll('.month-card img').forEach(imgEl => {
 		const parts = imgEl.src.split('/')
 		const fileName = parts[parts.length - 1]
 		imgEl.src = `./img/cards/${deck}/${fileName}`

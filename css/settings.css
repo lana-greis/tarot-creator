@@ -1,0 +1,88 @@
+.settings {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  z-index: 998;
+  font-family: sans-serif;
+}
+
+#settings__wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.settings__toggle {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-left: none;
+  width: 35px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 2; 
+	overflow: hidden;
+}
+
+.settings__img {
+	width: 30px;
+	display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.settings__panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  padding: 6px 10px;
+  position: absolute;
+  left: 35px;
+  bottom: 0;
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+#settings__wrapper[data-state="open"] .settings__panel {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#settings__wrapper[data-state="open"] .settings__img {
+  transform: rotate(180deg);
+}
+
+.settings__btn_save,
+.settings__btn_load {
+	font-size: 18px;
+	font-family: "Poiret One", sans-serif;
+	background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px;
+	transition: background 0.3s ease, transform 0.3s ease;
+	border-radius: 5px;
+}
+
+.settings__btn_save:hover,
+.settings__btn_load:hover {
+	cursor: pointer;
+	background: #e4e4e4;
+	transform: scale(1.1, 1.1);
+}
