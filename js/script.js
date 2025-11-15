@@ -1,4 +1,4 @@
-/*import { firebaseConfig } from './firebase.js'
+import { firebaseConfig } from './firebase.js'
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"
 import {
 	getFirestore,
@@ -10,7 +10,7 @@ import {
 
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
-*/
+
 const calendarDates = document.querySelector('.calendar__dates')
 const choosenDate = document.querySelector('.chose-date')
 const choosenMonthInput = choosenDate.children[0].children[1]
