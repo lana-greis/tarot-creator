@@ -22,7 +22,7 @@ const choseThemeSelect = document.querySelector('.chose-theme-select')
 const choseDeckSelect = document.querySelector('.chose-deck-select')
 const monthCardItem = document.querySelector('.month-card')
 
-let currentDeck = '1001-nights'
+let currentDeck = 'ethereal-romantic'
 let isMonthFormReal = false
 
 const formSelectFirstValues = [
