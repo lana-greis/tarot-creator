@@ -1,0 +1,100 @@
+.what-day {
+  position: fixed;
+  bottom: 40px;
+  right: 0;
+  display: none;
+  align-items: center;
+  z-index: 998;
+  font-family: sans-serif;
+}
+
+#what-day__wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.what-day__toggle {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-left: none;
+  width: 20px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 2; 
+	overflow: hidden;
+}
+
+.what-day__chevron {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.what-day__panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  padding: 6px 10px;
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.what-day__label {
+  font-size: 18px;
+	font-family: "Poiret One", sans-serif;
+}
+
+.what-day__input {
+  width: 30px;
+  padding: 4px;
+  font-size: 14px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.what-day__btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.what-day__btn_img {
+  width: 20px;
+  height: 20px;
+}
+
+#what-day__wrapper[data-state="open"] .what-day__panel {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#what-day__wrapper[data-state="open"] .what-day__chevron {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 599px) {
+	.what-day {
+		display: flex;
+	}
+}
