@@ -684,7 +684,8 @@ async function saveLayout(data) {
 
 const saveGlobalWrapper = document.querySelector('.save-btn__wrapper')
 const saveBtnGlobal = saveGlobalWrapper.children[0]
-const textIntroItem = document.querySelector('.input-text')
+const textIntroItem = document.querySelector('.upper-text')
+const ytLinkItem = document.querySelector('.yt-link')
 
 saveBtnGlobal.addEventListener('click', () => {
 	const month = choosenMonthInput.value
@@ -731,6 +732,7 @@ saveBtnGlobal.addEventListener('click', () => {
 		theme: choseThemeSelect.value,
 		deck: choseDeckSelect.value,
 		introText: textIntroItem.value,
+		ytLink: ytLinkItem.value
 	}
 
 	let isFail = false

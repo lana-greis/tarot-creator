@@ -13,7 +13,7 @@ body {
 	padding: 40px 20px;
 	display: flex;
 	flex-direction: column;
-	gap: 100px;	
+	gap: 60px;	
 }
 
 button:hover {
