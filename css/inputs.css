@@ -1,0 +1,205 @@
+.days-input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	display: none;
+	z-index: 999;
+}
+
+.day-input {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1280px;
+  padding: 80px 20px 20px;
+  display: none;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+}
+
+.inputs-active {
+	background: #000000dc;
+	display: block;
+}
+
+.day_shown {
+	display: flex;
+}
+
+.day-input__choose-card,
+.day-input__choose-color {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.day-input__choose-card_p,
+.day-input__choose-color_p,
+.day-input__text_p {
+	color: aliceblue;
+	font-family: "Marck Script", cursive;
+	font-size: 24px;
+	display: flex;
+	align-items: center;
+}
+
+.days-input input[type='text'],
+.days-input select {
+	font-family: "Poiret One", sans-serif;
+	font-size: 20px;
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+.days-input select option {
+	font-family: "Poiret One", sans-serif;
+	font-size: 20px;
+}
+
+.day-input__choose-color select option {
+	color: rgb(184, 189, 194);
+}
+
+.day-input__choose-color select option[value='a10000'] {
+	background-color: #a10000;
+}
+
+.day-input__choose-color select option[value='1c18e6'] {
+	background-color: #1c18e6;
+}
+
+.day-input__choose-color select option[value='ffe922'] {
+	background-color: #ffe922;
+}
+
+.day-input__choose-color select option[value='139202'] {
+	background-color: #139202;
+}
+
+.day-input__choose-color select option[value='b84c04'] {
+	background-color: #b84c04;
+}
+
+.day-input__choose-color select option[value='000000'] {
+	background-color: #000000;
+}
+
+.day-input__choose-color select option[value='616161'] {
+	background-color: #616161;
+}
+
+.day-input__text_p {
+	margin-bottom: 10px;
+}
+
+.day-input__text_full,
+.day-input__btns > button {
+	padding: 5px 10px;
+	border-radius: 10px;
+}
+
+.day-input__btns {
+	display: flex;
+	gap: 20px;
+}
+
+.day-input__btns > button {
+	font-family: "Poiret One", sans-serif;
+	font-size: 20px;
+}
+
+.day-input__text_full {
+	width: 450px;
+	height: 250px;
+	font-family: "Poiret One", sans-serif;
+	font-size: 20px;
+}
+
+@media (max-width: 1279px) {
+	.day-input {
+		max-width: 1024px;
+		padding: 20px;
+		gap: 20px;
+	}
+}
+
+@media (max-width: 1023px) {
+	.day-input {
+		max-width: 768px;
+	}
+
+	.day-input__choose-card_p,
+	.day-input__choose-color_p,
+	.day-input__text_p {
+		font-size: 16px;
+	}
+
+	.days-input input[type='text'],
+	.days-input select,
+	.day-input__text_full,
+	.day-input__btns > button {
+		padding: 2.5px 5px;
+		border-radius: 5px;
+	}
+
+	.day-input__text_full {
+		width: 600px;
+		height: 350px;
+	}
+}
+
+@media (max-width: 767px) {
+	.day-input {
+		max-width: 600px;
+	}
+
+	.day-input__choose-card_p,
+	.day-input__choose-color_p,
+	.day-input__text_p {
+		font-size: 18px;
+	}
+
+	.days-input input[type='text'],
+	.days-input select,
+	.day-input__text_full,
+	.day-input__btns > button {
+		padding: 2.5px 5px;
+		border-radius: 5px;		
+	}
+
+	.day-input__text_full,
+	.days-input input[type='text'],
+	.days-input select,
+	.days-input select option {
+		font-size: 15px;
+	}
+
+	.day-input__text_full {
+		width: 450px;
+		height: 250px;
+	}
+}
+
+@media (max-width: 599px) {
+	.day-input {
+		width: 100%;
+	}
+
+	.day-input__text_full {
+		width: calc(100vw - 45px);
+		height: 250px;
+	}
+}
+
+@media (max-width: 399px) {
+ .day-input__choose-card,
+ .day-input__choose-color {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+ }
+}
